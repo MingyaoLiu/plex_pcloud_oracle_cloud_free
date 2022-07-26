@@ -118,6 +118,7 @@ Documenting complete steps for personal reference in the future. Free tier allow
 
   [Service]
   User=ubuntu
+  Group=ubuntu
   Type=simple
   ExecStart=/home/ubuntu/start_pcloud.sh
   Restart=on-failure
@@ -131,4 +132,4 @@ Documenting complete steps for personal reference in the future. Free tier allow
   
   d. if mounted pcloud directory works and you can see all the files, enable pcloud service to startup: `sudo systemctl enable pcloud`
   
-6. 
+6. reboot your server, and everything should work correctly.
