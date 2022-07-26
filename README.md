@@ -38,23 +38,25 @@ Documenting complete steps for personal reference in the future. Free tier allow
   
   b. install with `sudo dpkg -i plexmediaserver...xxx..._arm64.deb`
   
-  c. However since plexmediaserver is running with non-login user `plex`, it doesn't have enough file permission for our pcloud mounted files, we will change the runnign user of plex to ubuntu, so that it 100% sure have the file permission:
+  c. However since plexmediaserver is running with non-login user plex, it doesn't have enough file permission for our pcloud mounted files, we will change the runnign user of plex to ubuntu, so that it 100% sure have the file permission:
   
-    i. stop plex service: `sudo systemctl stop plexmediaserver`
+  i. stop plex service: `sudo systemctl stop plexmediaserver`
+  
+  ii. add override: `sudo systemctl edit plexmediaserver`, and add:
     
-    ii. add override: `sudo systemctl edit plexmediaserver`, and  add:
-      ```
-      [Service]
-      User=ubuntu
-      Group=ubuntu
-      ```
-      to the space above `### Lines below this comment will be discarded`
+   ```
+   [Service]
+   User=ubuntu
+   Group=ubuntu
+   ```
       
-    iii. relead daemon `sudo systemctl daemon-reload`
+   to the space above `### Lines below this comment will be discarded`
+      
+   iii. relead daemon `sudo systemctl daemon-reload`
     
-    iv. change file ownership of plex media server files: `sudo chown -R ubuntu:ubuntu /var/lib/plexmediaserver`
+   iv. change file ownership of plex media server files: `sudo chown -R ubuntu:ubuntu /var/lib/plexmediaserver`
     
-    v. start plexmediaserver again: `sudo systemctl start plexmediaserver` or reboot the server
+   v. start plexmediaserver again: `sudo systemctl start plexmediaserver` or reboot the server
     
   d. Now you should be able to access the server from the external ip of the oracle cloud compute instance. However to set up a new plex server, we need local access first, and to do this we need to tunnel the 32400 port to local PC with ssh. Add tunnel in `PuTTY -> SSH -> Tunnels`
   
@@ -76,6 +78,7 @@ Documenting complete steps for personal reference in the future. Free tier allow
   e. (example) using the 2FA PR: `pcloudcc -u [MY@EMAIL.COM] -p -t [2FA_CODE] -r -m /home/ubuntu/pcloud_data -s`
   
   f. If successful, you should see log similar to this: 
+  
   ```
   pCloud console client v.2.0.1
   Please, enter password
@@ -98,12 +101,15 @@ Documenting complete steps for personal reference in the future. Free tier allow
 5. Make pCloud a system service that start with the system
 
   a. Create a script `sudo nano /home/ubuntu/start_pcloud.sh`:
-    ```
-    #! /bin/bash
-    /usr/local/bin/pcloudcc -u [MY@EMAIL.COM] -m /home/ubuntu/pcloud_data
-    ```
+  
+  ```
+  #! /bin/bash
+  /usr/local/bin/pcloudcc -u [MY@EMAIL.COM] -m /home/ubuntu/pcloud_data
+  ```
+    
     
   b. Create a service file `sudo nano /etc/systemd/system/pcloud.service`:
+  
   ```
     [Unit]
     Description=pCloud Start Service
