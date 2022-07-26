@@ -16,9 +16,56 @@ Oracle Cloud:
 SSH:
 
 1. convert pem to ppk with puttygen, and use it to connect ssh to the server. put `ubuntu@xxx.xxx.xxx.xxx` so it automatically login with ubuntu user.
+
 2. To allow plex port access, in addition to the security rule on Oracle Cloud, we also need to add a rule in the iftable
   a. update iptable to allow 32400 port access: (for tcp) `sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 32400 -j ACCEPT` (for udp) `sudo iptables -I INPUT 6 -m state --state NEW -p udp --dport 32400 -j ACCEPT`
   b. save the iftable configuration so we don't need to update it everytime after reboot: `sudo netfilter-persistent save`
+  
+3. Install PlexMediaServer
+  a. download plexmedia server here (debian ARMv8): https://www.plex.tv/media-server-downloads/#plex-media-server
+  b. install with `dpkg -i plexmediaserver...xxxx.xxx.deb`
+  c. However since plexmediaserver is running with non-login user `plex`, it doesn't have enough file permission for our pcloud mounted files, we will change the runnign user of plex to ubuntu, so that it 100% sure have the file permission:
+    i. stop plex service: `sudo systemctl stop plexmediaserver`
+    ii. add override: `sudo systemctl edit plexmediaserver`, and  add:
+      ```
+      [Service]
+      User=ubuntu
+      Group=ubuntu
+      ```
+      to the space above `### Lines below this comment will be discarded`
+    iii. relead daemon `sudo systemctl daemon-reload`
+    iv. change file ownership of plex media server files: `sudo chown -R ubuntu:ubuntu /var/lib/plexmediaserver`
+    v. start plexmediaserver again: `sudo systemctl start plexmediaserver` or reboot the server
+ 
+4. Build pCloud console client:
+  a. Follow the install instruction here: https://github.com/pcloudcom/console-client
+  b. There might be missing build required package, see here: https://github.com/pcloudcom/console-client/pull/158
+  c. If you enabled 2FA on pCloud, you may need to use a fetched version of console-client. See here: https://github.com/pcloudcom/console-client/pull/163
+  d. Make sure you create the mount point directory with `mkdir /home/ubuntu/pcloud_data`, if the directory doesn't exist, pcloud might fail or stuck in my test.
+  e. you don't need to use pcloudcc daemon -d, we will create a system service in the next step so it starts after system boot.
+  
+5. Make pCloud a system service that start with the system
+  a. Create a script `start_pcloud.sh`:
+    ```
+    #! /bin/bash
+    /usr/local/bin/pcloudcc -u [MY@EMAIL.COM] -m /home/ubuntu/pcloud_data
+    ```
+  b. Create a service file `/etc/systemd/system/pcloud.service`:
+  ```
+    [Unit]
+    Description=pCloud Start Service
+    After=network.target
+    StartLimitBurst=5
+    StartLimitIntervalSec=10
 
+    [Service]
+    User=ubuntu
+    Type=simple
+    ExecStart=/home/ubuntu/pcloud.sh
+    Restart=on-failure
+    RestartSec=1
 
-
+    [Install]
+    WantedBy=multi-user.target
+  ```
+6. 
