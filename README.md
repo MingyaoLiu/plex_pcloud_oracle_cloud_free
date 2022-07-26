@@ -8,18 +8,20 @@ Documenting complete steps for personal reference in the future. Free tier allow
 
 2. create a compute instance
 
-  a. Choose ubuntu (plex support for arm64 is limited to debian as of July 2022, don't feel like compiling myself)
+3. Choose ubuntu (plex support for arm64 is limited to debian as of July 2022, don't feel like compiling myself)
   
-  b. Choose Ampere A1 (4 OCPU core, 24 GB ram)
+4. Choose Ampere A1 (4 OCPU core, 24 GB ram)
   
-  c. Update boot block device to 200GB, slide VPU to max 120 for peak IOPS: 45000 IOPS and Throughput: 360 MB/s
+5. Update boot block device to 200GB, slide VPU to max 120 for peak IOPS: 45000 IOPS and Throughput: 360 MB/s
   
-  d. make sure generate a public ip, default networking should be ok, then create the instance.
+6. make sure generate a public ip, default networking should be ok, then create the instance.
 
 
 ## Set up SSH
 
 1. convert pem to ppk with puttygen, and use it to connect ssh to the server. put `ubuntu@xxx.xxx.xxx.xxx` so it automatically login with ubuntu user.
+2. go to `SSH -> Auth`, and add the private ppk.
+3. Give it a name and save this configuration
 
 
 ## Allow Plex Port 32400 on Oracle Cloud Instance
