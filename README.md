@@ -105,6 +105,7 @@ Documenting complete steps for personal reference in the future. Free tier allow
   /usr/local/bin/pcloudcc -u [MY@EMAIL.COM] -m /home/ubuntu/pcloud_data
   ```
     
+  b. Make this script executable: `sudo chmod +x start_pcloud.sh`
     
   b. Create a service file `sudo nano /etc/systemd/system/pcloud.service`:
   
