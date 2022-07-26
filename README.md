@@ -77,17 +77,17 @@ Documenting complete steps for personal reference in the future. Free tier allow
  
 ## Build and Install pCloud console client:
 
-  a. Follow the compile instruction here: https://github.com/pcloudcom/console-client
+  1. Follow the compile instruction here: https://github.com/pcloudcom/console-client
   
-  b. There might be missing build required package, see here: https://github.com/pcloudcom/console-client/pull/158
+  2. There might be missing build required package, see here: https://github.com/pcloudcom/console-client/pull/158
   
-  c. If enabled 2FA on pCloud, may need to use a fetched version of console-client. See here: https://github.com/pcloudcom/console-client/pull/163
+  3. If enabled 2FA on pCloud, may need to use a fetched version of console-client. See here: https://github.com/pcloudcom/console-client/pull/163
   
-  d. Make sure you to the mount point directory manually under user `ubuntu` with `mkdir /home/ubuntu/pcloud_data`, if the directory doesn't exist, pcloud might fail or stuck.
+  4. Make sure you to the mount point directory manually under user `ubuntu` with `mkdir /home/ubuntu/pcloud_data`, if the directory doesn't exist, pcloud might fail or stuck.
   
-  e. (example) using the 2FA PR: `pcloudcc -u [MY@EMAIL.COM] -p -t [2FA_CODE] -r -m /home/ubuntu/pcloud_data -s`
+  5. (example) using the 2FA PR: `pcloudcc -u [MY@EMAIL.COM] -p -t [2FA_CODE] -r -m /home/ubuntu/pcloud_data -s`
   
-  f. If successful, you should see log similar to this: 
+  6. If successful, you should see log similar to this: 
   
   ```
   pCloud console client v.2.0.1
@@ -103,21 +103,21 @@ Documenting complete steps for personal reference in the future. Free tier allow
   Down: Everything Downloaded| Up: Everything Uploaded, status is READY
   ```
   
-  f. Doesn't need to use pcloudcc daemon -d, will create a system service in the next step so it starts after system boot.
+  7. Doesn't need to use pcloudcc daemon -d, will create a system service in the next step so it starts after system boot.
   
   
 ## Make pCloud a system service that start with the system
 
-  a. Create a script `sudo nano /home/ubuntu/start_pcloud.sh`:
+  1. Create a script `sudo nano /home/ubuntu/start_pcloud.sh`:
   
   ```
   #! /bin/bash
   /usr/local/bin/pcloudcc -u [MY@EMAIL.COM] -m /home/ubuntu/pcloud_data
   ```
     
-  b. Make this script executable: `sudo chmod +x start_pcloud.sh`
+  2. Make this script executable: `sudo chmod +x start_pcloud.sh`
     
-  b. Create a service file `sudo nano /etc/systemd/system/pcloud.service`:
+  3. Create a service file `sudo nano /etc/systemd/system/pcloud.service`:
   
   ```
   [Unit]
@@ -138,8 +138,8 @@ Documenting complete steps for personal reference in the future. Free tier allow
   WantedBy=multi-user.target
   ```
   
-  c. Start the pcloud service: `sudo systemctl start pcloud`
+  4. Start the pcloud service: `sudo systemctl start pcloud`
   
-  d. if mounted pcloud directory works and you can see all the files, enable pcloud service to startup: `sudo systemctl enable pcloud`
+  5. if mounted pcloud directory works and you can see all the files, enable pcloud service to startup: `sudo systemctl enable pcloud`
   
-6. reboot your server, and everything should work correctly.
+  6. reboot your server, and everything should work correctly.
