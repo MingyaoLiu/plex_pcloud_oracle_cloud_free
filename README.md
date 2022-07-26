@@ -111,21 +111,21 @@ Documenting complete steps for personal reference in the future. Free tier allow
   b. Create a service file `sudo nano /etc/systemd/system/pcloud.service`:
   
   ```
-    [Unit]
-    Description=pCloud Start Service
-    After=network.target
-    StartLimitBurst=5
-    StartLimitIntervalSec=10
+  [Unit]
+  Description=pCloud Start Service
+  After=network.target
+  StartLimitBurst=5
+  StartLimitIntervalSec=10
 
-    [Service]
-    User=ubuntu
-    Type=simple
-    ExecStart=/home/ubuntu/start_pcloud.sh
-    Restart=on-failure
-    RestartSec=1
+  [Service]
+  User=ubuntu
+  Type=simple
+  ExecStart=/home/ubuntu/start_pcloud.sh
+  Restart=on-failure
+  RestartSec=1
 
-    [Install]
-    WantedBy=multi-user.target
+  [Install]
+  WantedBy=multi-user.target
   ```
   
   c. Start the pcloud service: `sudo systemctl start pcloud`
