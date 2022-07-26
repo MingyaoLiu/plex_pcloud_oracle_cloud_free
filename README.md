@@ -19,7 +19,7 @@ Documenting complete steps for personal reference in the future. Free tier allow
 3. Update network ingress security to allow plex port ingress, so it is easier to connect to it after install plexmediaserver.
 
   a. go to oracle cloud -> networking -> virtual cloud networks -> subnet details -> Default Security List for subnet, click add Ingress Rules, add the following (the udp rule is probably useless, but I added it anyway):
-  
+  ![ingress setting](https://github.com/MingyaoLiu/plex_pcloud_oracle_cloud_free/blob/main/oracle_ingress_rules.png?raw=true)
   
 ## SSH:
 
@@ -52,13 +52,14 @@ Documenting complete steps for personal reference in the future. Free tier allow
       
    to the space above `### Lines below this comment will be discarded`
       
-   iii. relead daemon `sudo systemctl daemon-reload`
+   iii. reload daemon `sudo systemctl daemon-reload`
     
    iv. change file ownership of plex media server files: `sudo chown -R ubuntu:ubuntu /var/lib/plexmediaserver`
     
    v. start plexmediaserver again: `sudo systemctl start plexmediaserver` or reboot the server
     
   d. Now you should be able to access the server from the external ip of the oracle cloud compute instance. However to set up a new plex server, we need local access first, and to do this we need to tunnel the 32400 port to local PC with ssh. Add tunnel in `PuTTY -> SSH -> Tunnels`
+  ![PuTTY Tunnels](https://github.com/MingyaoLiu/plex_pcloud_oracle_cloud_free/blob/main/oracle_ingress_rules.png?raw=true)
   
   e. Now you can access the 32400 port from `http://localhost:32400/web`, finish the setup process for plex without adding any library.
   
