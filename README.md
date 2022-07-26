@@ -24,8 +24,8 @@ SSH:
   b. save the iftable configuration so we don't need to update it everytime after reboot: `sudo netfilter-persistent save`
   
 3. Install PlexMediaServer
-  a. download plexmedia server here (debian ARMv8): https://www.plex.tv/media-server-downloads/#plex-media-server
-  b. install with `dpkg -i plexmediaserver...xxxx.xxx.deb`
+  a. download plexmedia server with `sudo wget https://downloads.plex...xxxxx..._arm64.deb`
+  b. install with `sudo dpkg -i plexmediaserver...xxx..._arm64.deb`
   c. However since plexmediaserver is running with non-login user `plex`, it doesn't have enough file permission for our pcloud mounted files, we will change the runnign user of plex to ubuntu, so that it 100% sure have the file permission:
     i. stop plex service: `sudo systemctl stop plexmediaserver`
     ii. add override: `sudo systemctl edit plexmediaserver`, and  add:
