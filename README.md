@@ -91,8 +91,6 @@ Documenting complete steps for personal reference in the future. Free tier allow
   eventxxxxxxxxxx
   eventxxxxxxxxxx
   Down: Everything Downloaded| Up: Everything Uploaded, status is READY
-  fusermount: user has no write access to mountpoint /home/ubuntu/pcloud_data
-  fusermount: user has no write access to mountpoint /home/ubuntu/pcloud_data
   ```
   
   f. Doesn't need to use pcloudcc daemon -d, will create a system service in the next step so it starts after system boot.
