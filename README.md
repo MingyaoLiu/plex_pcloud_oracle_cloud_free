@@ -5,12 +5,14 @@ Documenting complete steps for personal reference in the future. Free tier allow
 Oracle Cloud:
 
 1. Sign up for oracle cloud, choose a region (cannot change in the future I believe)
+
 2. create a compute instance
   a. Choose ubuntu (plex support for arm64 is limited to debian as of July 2022, don't feel like compiling myself)
   b. Choose Ampere A1 (4 OCPU core, 24 GB ram)
   c. Update boot block device to 200GB, slide VPU to max 120 for peak IOPS: 45000 IOPS and Throughput: 360 MB/s
   d. make sure generate a public ip, default networking should be ok, then create the instance.
-4. Update network ingress security to allow plex port ingress, so it is easier to connect to it after install plexmediaserver.
+
+3. Update network ingress security to allow plex port ingress, so it is easier to connect to it after install plexmediaserver.
   a. go to oracle cloud -> networking -> virtual cloud networks -> subnet details -> Default Security List for subnet, click add Ingress Rules, add the following (the udp rule is probably useless, but I added it anyway):
   
 SSH:
@@ -36,21 +38,22 @@ SSH:
     iii. relead daemon `sudo systemctl daemon-reload`
     iv. change file ownership of plex media server files: `sudo chown -R ubuntu:ubuntu /var/lib/plexmediaserver`
     v. start plexmediaserver again: `sudo systemctl start plexmediaserver` or reboot the server
+  d. Now 
  
 4. Build pCloud console client:
-  a. Follow the install instruction here: https://github.com/pcloudcom/console-client
+  a. Follow the compile instruction here: https://github.com/pcloudcom/console-client
   b. There might be missing build required package, see here: https://github.com/pcloudcom/console-client/pull/158
-  c. If you enabled 2FA on pCloud, you may need to use a fetched version of console-client. See here: https://github.com/pcloudcom/console-client/pull/163
-  d. Make sure you create the mount point directory with `mkdir /home/ubuntu/pcloud_data`, if the directory doesn't exist, pcloud might fail or stuck in my test.
-  e. you don't need to use pcloudcc daemon -d, we will create a system service in the next step so it starts after system boot.
+  c. If enabled 2FA on pCloud, may need to use a fetched version of console-client. See here: https://github.com/pcloudcom/console-client/pull/163
+  d. Make sure you to the mount point directory manually with `sudo mkdir /home/ubuntu/pcloud_data`, if the directory doesn't exist, pcloud might fail or stuck.
+  e. Doesn't need to use pcloudcc daemon -d, will create a system service in the next step so it starts after system boot.
   
 5. Make pCloud a system service that start with the system
-  a. Create a script `start_pcloud.sh`:
+  a. Create a script `sudo nano /home/ubuntu/start_pcloud.sh`:
     ```
     #! /bin/bash
     /usr/local/bin/pcloudcc -u [MY@EMAIL.COM] -m /home/ubuntu/pcloud_data
     ```
-  b. Create a service file `/etc/systemd/system/pcloud.service`:
+  b. Create a service file `sudo nano /etc/systemd/system/pcloud.service`:
   ```
     [Unit]
     Description=pCloud Start Service
@@ -68,4 +71,6 @@ SSH:
     [Install]
     WantedBy=multi-user.target
   ```
+  c. Start the pcloud service: `sudo systemctl start pcloud`
+  d. if mounted pcloud directory works and you can see all the files, enable pcloud service to startup: `sudo systemctl enable pcloud`
 6. 
