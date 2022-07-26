@@ -1,4 +1,4 @@
-# plex_pcloud_oracle_cloud_free
+# Setup Free Oracle Cloud + Plex Media Server + pCloud Intergration
 
 Documenting complete steps for personal reference in the future. Free tier allowance might change in the future, all of the free tier quota is as of July 2022, if you see this guide in the future, the quota may have been different. Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mistake on the free quota, it won't be the end of the day.
 
