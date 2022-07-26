@@ -150,5 +150,18 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
 4. Start the pcloud service: `sudo systemctl start pcloud`
   
 5. If mounted pcloud directory works and you can see all the files, enable pcloud service to startup: `sudo systemctl enable pcloud`
-  
-6. Reboot your server, and everything should work correctly.
+
+
+## Success 
+
+1. Reboot your server, and everything should work correctly.
+
+
+## TODO
+
+1. Encrypt files on client side with secret, so DMCA won't take it down
+2. Find the best transcoding setting for Ampere A1.
+4. Test how much oracle cloud instance cost if adding more cores.
+5. Explore other cloud storage options
+6. Test if running in Oracle Cloud container is better. They do give 4500 OCPU time for Containers, and if it's a serverless application, and because plex media server doesn't have to run 24/7, it may mean free 40 core server.
+7. Secure the server instance. pCloud CLI tool doesn't allow any permission to be added, so everything is write permission. be careful with it.
