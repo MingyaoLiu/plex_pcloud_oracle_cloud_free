@@ -26,8 +26,11 @@ Documenting complete steps for personal reference in the future. Free tier allow
 1. convert pem to ppk with puttygen, and use it to connect ssh to the server. put `ubuntu@xxx.xxx.xxx.xxx` so it automatically login with ubuntu user.
 
 2. To allow plex port access, in addition to the security rule on Oracle Cloud, we also need to add a rule in the iftable
+
   a. update iptable to allow 32400 port access: (for tcp) `sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 32400 -j ACCEPT` (for udp) `sudo iptables -I INPUT 6 -m state --state NEW -p udp --dport 32400 -j ACCEPT`
+  
   b. save the iftable configuration so we don't need to update it everytime after reboot: `sudo netfilter-persistent save`
+  
   
 3. Install PlexMediaServer
 
@@ -70,7 +73,26 @@ Documenting complete steps for personal reference in the future. Free tier allow
   
   d. Make sure you to the mount point directory manually with `sudo mkdir /home/ubuntu/pcloud_data`, if the directory doesn't exist, pcloud might fail or stuck.
   
-  e. Doesn't need to use pcloudcc daemon -d, will create a system service in the next step so it starts after system boot.
+  e. (example) using the 2FA PR: `pcloudcc -u [MY@EMAIL.COM] -p -t [2FA_CODE] -r -m /home/ubuntu/pcloud_data -s`
+  
+  f. If successful, you should see log similar to this: 
+  ```
+  pCloud console client v.2.0.1
+  Please, enter password
+  Down: Everything Downloaded| Up: Everything Uploaded, status is LOGIN_REQUIRED
+  logging in
+  Down: Everything Downloaded| Up: Everything Uploaded, status is CONNECTING
+  Down: Everything Downloaded| Up: Everything Uploaded, status is TFA_REQUIRED
+  Down: Everything Downloaded| Up: Everything Uploaded, status is CONNECTING
+  Down: Everything Downloaded| Up: Everything Uploaded, status is SCANNING
+  eventxxxxxxxxxx
+  eventxxxxxxxxxx
+  Down: Everything Downloaded| Up: Everything Uploaded, status is READY
+  fusermount: user has no write access to mountpoint /home/ubuntu/pcloud_data
+  fusermount: user has no write access to mountpoint /home/ubuntu/pcloud_data
+  ```
+  
+  f. Doesn't need to use pcloudcc daemon -d, will create a system service in the next step so it starts after system boot.
   
   
 5. Make pCloud a system service that start with the system
@@ -92,7 +114,7 @@ Documenting complete steps for personal reference in the future. Free tier allow
     [Service]
     User=ubuntu
     Type=simple
-    ExecStart=/home/ubuntu/pcloud.sh
+    ExecStart=/home/ubuntu/start_pcloud.sh
     Restart=on-failure
     RestartSec=1
 
