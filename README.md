@@ -140,22 +140,31 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
   Group=ubuntu
   Type=simple
   ExecStart=/home/ubuntu/start_pcloud.sh
-  Restart=always
-  RestartSec=60
-  ExecStartPre=-/bin/sleep 30
+  Restart=on-failure
+  RestartSec=1
+  ExecStartPre=/bin/sleep 30
 
   [Install]
   WantedBy=multi-user.target
   ```
   
-4. Start the pcloud service: `sudo systemctl start pcloud`
+4. Restart system daemon: `sudo systemctl daemon-reload`
+5. Start the pcloud service: `sudo systemctl start pcloud`
   
-5. If mounted pcloud directory works and you can see all the files, enable pcloud service to startup: `sudo systemctl enable pcloud`
+6. If mounted pcloud directory works and you can see all the files, enable pcloud service to startup: `sudo systemctl enable pcloud`
 
 
 ## Success 
 
 1. Reboot your server, and everything should work correctly.
+
+## TroubleShooting
+#### pcloud directory empty, or received BAD_LOGIN_TOKEN in status
+1. check your pcloud service with `sudo systemctl status pcloud`
+2. if it shows `Down: Everything Downloaded| Up: Everything Uploaded, status is BAD_LOGIN_TOKEN`, then this applies.
+3. stop pcloud service `sudo service pcloud stop`
+4. remove all auth token saved (see issue here: https://github.com/pcloudcom/console-client/issues/72)
+5. however the fix with sqlite didn't work for me. I had to delete the .pcloud folder, and re-authenticate.
 
 
 ## TODO
