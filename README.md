@@ -131,7 +131,7 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
   ```
   [Unit]
   Description=pCloud Start Service
-  After=network.target
+  After=network-online.target
   StartLimitBurst=5
   StartLimitIntervalSec=10
 
@@ -140,8 +140,9 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
   Group=ubuntu
   Type=simple
   ExecStart=/home/ubuntu/start_pcloud.sh
-  Restart=on-failure
-  RestartSec=1
+  Restart=always
+  RestartSec=60
+  ExecStartPre=-/bin/sleep 30
 
   [Install]
   WantedBy=multi-user.target
