@@ -141,7 +141,7 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
   Type=simple
   ExecStart=/home/ubuntu/start_pcloud.sh
   Restart=on-failure
-  RestartSec=1
+  RestartSec=5
   ExecStartPre=/bin/sleep 30
 
   [Install]
