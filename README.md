@@ -183,3 +183,8 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
 5. Explore other cloud storage options
 6. Test if running in Oracle Cloud container is better. They do give 4500 OCPU time for Containers, and if it's a serverless application, and because plex media server doesn't have to run 24/7, it may mean free 40 core server.
 7. Secure the server instance. pCloud CLI tool doesn't allow any permission to be added, so everything is write permission. be careful with it.
+
+
+## Conclusion
+
+This is a very fun project, although oracle kind of blocked me from registering new account. I'm able to stream 4K from Toronto to Waterloo with CPU hovering around 80%, and no buffering on 4K. I also tried streaming from Switzerland (because pcloud is in EU), and it lags and quality is not very good.
