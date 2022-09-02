@@ -188,3 +188,7 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
 ## Conclusion
 
 This is a very fun project, although oracle kind of blocked me from registering new account. I'm able to stream 4K from Toronto to Waterloo with CPU hovering around 80%, and no buffering on 4K. I also tried streaming from Switzerland (because pcloud is in EU), and it lags and quality is not very good.
+
+(just got an response back from oracle support, apparently you can only have 1 free account, and my name and address is already used once, so no more free oracle cloud for me.)
+
+Anyway share what you accomplished or any questions in the issues page, also may I kindly advise you to not share this to others, if it blows up in popularity, you can imagine everyone will get banned quite soon.
