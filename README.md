@@ -160,7 +160,7 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
 
 
 ## Add reboot to system every day
-1. Go to crontab file: `sudo nano /etc/crontab`
+1. Go to crontab file: `sudo crontab -e`
 2. add `0 2 * * * sudo shutdown -r` to restart server every day at 2am
 3. (This is added to test if login token will auto refresh on reboot, still needs more testing)
 
