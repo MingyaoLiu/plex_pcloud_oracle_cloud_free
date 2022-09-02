@@ -159,10 +159,12 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
 1. Reboot your server, and everything should work correctly.
 
 
-## Add reboot to system every day
+## Aftermath
+#### set correct timezone and scheduled reboot
+1. Set timezone with `sudo timedatectl set-timezone [YOUR_TIME_ZONE]`, find a correct time zone with `timedatectl list-timezones`
 1. Go to crontab file: `sudo crontab -e`
 2. add `0 2 * * * sudo shutdown -r` to restart server every day at 2am
-3. (This is added to test if login token will auto refresh on reboot, still needs more testing)
+3. This helps with keeping the server refreshed every day, (also this is added to test if login token will auto refresh on reboot, still needs more testing)
 
 
 
