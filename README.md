@@ -187,10 +187,12 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
 7. Secure the server instance. pCloud CLI tool doesn't allow any permission to be added, so everything is write permission. be careful with it.
 
 
-## Conclusion
+## Conclusion and Further Thoughts
 
 This is a very fun project, although oracle kind of blocked me from registering new account. I'm able to stream 4K from Toronto to Waterloo with CPU hovering around 80%, and no buffering on 4K. I also tried streaming from Switzerland (because pcloud is in EU), and it lags and quality is not very good.
 
 (just got an response back from oracle support, apparently you can only have 1 free account, and my name and address is already used once, so no more free oracle cloud for me.)
+
+Another thing to note is pcloud free only has 10gb of storage, and oracle cloud gives you 200GB boot block... so it's probably better to just upload media to oracle cloud's boot block (not sure about DMCA), and back up or rsync it to a backup location.
 
 Anyway share what you accomplished or any questions in the issues page, also may I kindly advise you to not share this to others, if it blows up in popularity, you can imagine everyone will get banned quite soon.
