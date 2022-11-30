@@ -92,7 +92,7 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
   
 3. If enabled 2FA on pCloud, may need to use a fetched version of console-client. See here: https://github.com/pcloudcom/console-client/pull/163
   
-4. Make sure you to the mount point directory manually under user `ubuntu` with `mkdir /home/ubuntu/pcloud_data`, if the directory doesn't exist, pcloud might fail or stuck.
+4. Make sure to the mount point directory manually under user `ubuntu` with `mkdir /home/ubuntu/pcloud_data`, if the directory doesn't exist, pcloud might fail or stuck.
   
 5. (example donot copy) using the 2FA PR: `pcloudcc -u [MY@EMAIL.COM] -p -t [2FA_CODE] -r -m /home/ubuntu/pcloud_data -s`
   
