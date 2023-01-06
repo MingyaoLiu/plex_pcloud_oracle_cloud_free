@@ -196,3 +196,8 @@ This is a very fun project, although oracle kind of blocked me from registering 
 Another thing to note is pcloud free only has 10gb of storage, and oracle cloud gives you 200GB boot block... so it's probably better to just upload media to oracle cloud's boot block (not sure about DMCA), and back up or rsync it to a backup location.
 
 Anyway share what you accomplished or any questions in the issues page, also may I kindly advise you to not share this to others, if it blows up in popularity, you can imagine everyone will get banned quite soon.
+
+## Updates
+
+### Jan 2023
+I have not touched both instance for a few month, and both are going strong. Also no logging into pcloud needed, it's auto refreshing with reboot everyday.
