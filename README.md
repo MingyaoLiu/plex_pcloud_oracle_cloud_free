@@ -51,9 +51,9 @@ Oracle cloud does give you 300 bucks for 30 day trial, so even if you make a mis
  
 ## Install PlexMediaServer and update User
 
-1. Download plexmedia server with `sudo wget https://downloads.plex...xxxxx..._arm64.deb`
+1. Download plexmedia server with `sudo wget https://downloads.plex...xxxxx..._arm64.deb -O plex.deb`
   
-2. Install with `sudo dpkg -i plexmediaserver...xxx..._arm64.deb`
+2. Install with `sudo dpkg -i plex.deb`
   
 3. However since plexmediaserver is running with non-login user plex, it doesn't have enough file permission for our pcloud mounted files, we will change the runnign user of plex to ubuntu, so that it 100% sure have the file permission:
   
